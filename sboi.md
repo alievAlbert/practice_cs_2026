@@ -20,8 +20,9 @@ classDiagram
 
     class Device {
         +int DeviceId
-        +string? DeviceName
+        +string DeviceName
         +Device(int id, string? name)
+        -ValidateName(string? name) static string
     }
 
     class Failure {
@@ -33,11 +34,14 @@ classDiagram
     }
 
     class ReportMaker {
-        +FindDevicesFailedBeforeDateObsolete(int day, int month, int year, int[] failureTypes, int[] deviceId, object[][] times, List~Dictionary~ devices) List~string~
-        +FindDevicesFailedBeforeDate(List~Device~ devices, List~Failure~ failures, DateTime targetDate) List~string~
+        +FindDevicesFailedBeforeDateObsolete(int day, int month, int year, int[] failureTypes, int[] deviceId, object[][] times, List~Dictionary~ devices) static List~string~
+        +FindDevicesFailedBeforeDate(List~Device~ devices, List~Failure~ failures, DateTime targetDate) static List~string~
+        -ConvertToFailuresList(int[] failureTypes, int[] deviceId, object[][] times) static List~Failure~
+        -ConvertToDevicesList(List~Dictionary~ devices) static List~Device~
     }
 
     Failure --> FailureType : хранит категорию сбоя
     ReportMaker ..> Device : извлекает имена устройств
     ReportMaker ..> Failure : фильтрует по дате и критичности сбоя
+
 ```
