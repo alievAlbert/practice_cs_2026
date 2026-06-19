@@ -85,3 +85,4 @@ classDiagram
     CompoundBody o-- Body
 
     Body ..> IVisitor
+```
