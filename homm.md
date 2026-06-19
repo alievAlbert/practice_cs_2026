@@ -61,20 +61,29 @@ classDiagram
         +Treasure Treasure
     }
 
-    IMapObject <|-- IArmy
-    IMapObject <|-- ITreasure
-    IMapObject <|-- IOwner
+    class Player {
+        +int Id
+        +CanBeat(Army army) bool
+        +Consume(Treasure treasure) void
+        +Die() void
+    }
 
-    IOwner <|.. Dwelling : реализует
-    IOwner <|.. Mine : реализует
-    IArmy <|.. Mine : реализует
-    ITreasure <|.. Mine : реализует
-    IArmy <|.. Creeps : реализует
-    ITreasure <|.. Creeps : реализует
-    IArmy <|.. Wolves : реализует
-    ITreasure <|.. ResourcePile : реализует
+    IArmy --|> IMapObject
+    ITreasure --|> IMapObject
+    IOwner --|> IMapObject
 
-    Interaction ..> IArmy : проверяет охрану
-    Interaction ..> IOwner : перезаписывает владельца
-    Interaction ..> ITreasure : передает золото
+    Dwelling ..|> IOwner
+    Mine ..|> IOwner
+    Mine ..|> IArmy
+    Mine ..|> ITreasure
+    Creeps ..|> IArmy
+    Creeps ..|> ITreasure
+    Wolves ..|> IArmy
+    ResourcePile ..|> ITreasure
+
+    Interaction ..> IMapObject : принимает в параметрах
+    Interaction ..> Player : принимает в параметрах
+    Interaction ..> IArmy : использует при наличии охраны
+    Interaction ..> IOwner : использует для смены владельца
+    Interaction ..> ITreasure : использует для сбора золота
 ```
