@@ -68,9 +68,9 @@ classDiagram
         +Die() void
     }
 
-    IArmy --|> IMapObject
-    ITreasure --|> IMapObject
-    IOwner --|> IMapObject
+    IMapObject <|.. IArmy
+    IMapObject <|.. ITreasure
+    IMapObject <|.. IOwner
 
     Dwelling ..|> IOwner
     Mine ..|> IOwner
