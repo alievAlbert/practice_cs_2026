@@ -10,7 +10,7 @@
 
 ## 2. Диаграмма классов (Mermaid)
 
-``` mermaid
+```mermaid
 classDiagram
     class Algebra {
         -Dictionary~ExpressionType,Func~ BinaryRules$
